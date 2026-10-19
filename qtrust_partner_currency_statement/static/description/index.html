@@ -2,42 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Q-Trust Partner Currency Statement</title>
 </head>
 <body>
   <section class="oe_container">
     <div class="oe_row oe_spaced">
       <h2 class="oe_slogan">Q-Trust Partner Currency Statement</h2>
-      <h3 class="oe_slogan">Customer and vendor movements in one selected currency</h3>
+      <h3 class="oe_slogan">A clearer view of customer and vendor balances in your selected currency</h3>
+      <div class="oe_demo oe_picture oe_screenshot">
+        <img src="banner.svg" alt="Q-Trust Partner Currency Statement overview" style="max-width:100%;height:auto;"/>
+      </div>
       <p class="oe_mt32">
-        View an interactive partner statement from Accounting with company, partner,
-        currency, and date filters. Review opening balance, period debit and credit,
-        and closing balance in a single screen.
+        Review partner account movements for a selected company, partner, currency, and date range.
+        See the opening balance, period debit and credit totals, and closing balance in one report.
       </p>
     </div>
   </section>
+
   <section class="oe_container">
     <div class="oe_row oe_spaced">
-      <h3>Key features</h3>
+      <h2 class="oe_slogan">How it works</h2>
+      <div class="oe_span12">
+        <h3>1. Open the report</h3>
+        <p>In Odoo, go to <strong>Accounting → Reporting → Foreign Currency Statement</strong>.</p>
+        <h3>2. Choose your statement filters</h3>
+        <p>Select the company, customer or vendor, currency, and reporting date range. Use the filters to focus on the account movements you need to review.</p>
+        <h3>3. Review the balance and transactions</h3>
+        <p>Review the opening balance, debit and credit totals for the selected period, closing balance, and the transaction rows available in the report. Use the row search to find a specific movement.</p>
+        <h3>4. Export or print</h3>
+        <p>Export statement lines to XLSX or print a PDF report for sharing and review.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="oe_container">
+    <div class="oe_row oe_spaced">
+      <h2 class="oe_slogan">Understand the statement</h2>
+      <p>The following is an <strong>illustrative example</strong> to explain how statement totals relate to transactions. Values and references are sample data, not a screenshot or a live result from your database.</p>
+      <div class="oe_demo oe_picture oe_screenshot">
+        <img src="transaction_example.svg" alt="Illustrative customer statement showing sample debit and credit movements" style="max-width:100%;height:auto;"/>
+      </div>
+      <p>Opening balance + period debits − period credits = closing balance, when presented from the customer/receivable perspective. The exact sign and presentation should be interpreted according to the report and account type.</p>
+    </div>
+  </section>
+
+  <section class="oe_container">
+    <div class="oe_row oe_spaced">
+      <h2 class="oe_slogan">Key features</h2>
       <ul>
-        <li>Customer or vendor statement from Accounting reporting.</li>
-        <li>Filter by partner, active company, currency, and date period.</li>
-        <li>Review opening balance, debit, credit, and closing balance.</li>
-        <li>Search within displayed transaction rows.</li>
+        <li>Customer and vendor statement from the Accounting reporting menu.</li>
+        <li>Filter by partner, company, currency, and date period.</li>
+        <li>Opening balance, period debit and credit totals, and closing balance.</li>
+        <li>Search within the displayed transaction rows.</li>
         <li>Export statement lines to XLSX and print a PDF report.</li>
-        <li>Designed as an additional report; it does not replace standard accounting reports.</li>
+        <li>An additional reporting tool; it does not replace or modify standard accounting entries.</li>
       </ul>
     </div>
   </section>
+
   <section class="oe_container">
     <div class="oe_row oe_spaced">
-      <h3>Compatibility</h3>
-      <p>Version: Odoo 19.0</p>
-      <p>Dependency: Accounting (<code>account</code>)</p>
-      <p>License: LGPL-3</p>
-      <p><strong>Important:</strong> Validate the module in a test database before production use,
-      especially multi-company access, foreign-currency settlements, reconciliations, PDF output,
-      and spreadsheet exports.</p>
+      <h2 class="oe_slogan">Compatibility & notes</h2>
+      <ul>
+        <li><strong>Odoo version:</strong> 19.0</li>
+        <li><strong>Dependency:</strong> Accounting (<code>account</code>)</li>
+        <li><strong>License:</strong> LGPL-3</li>
+      </ul>
+      <p><strong>Before production use:</strong> test multi-company access, foreign-currency settlements and reconciliations, and PDF/XLSX output in a test database.</p>
     </div>
   </section>
 </body>
