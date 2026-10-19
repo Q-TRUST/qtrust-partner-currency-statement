@@ -19,7 +19,7 @@
         ],
     },
     "images": [
-        "static/description/banner.png",
+        "static/description/banner.svg",
     ],
     "application": True,
 }
