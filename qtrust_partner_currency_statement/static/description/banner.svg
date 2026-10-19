@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#102a43"/><stop offset="1" stop-color="#1f6d83"/></linearGradient></defs>
-  <rect width="1200" height="600" rx="28" fill="url(#bg)"/>
-  <circle cx="1060" cy="100" r="180" fill="#fff" opacity=".05"/>
-  <circle cx="150" cy="550" r="230" fill="#fff" opacity=".04"/>
-  <text x="74" y="105" font-family="Arial,sans-serif" font-size="28" fill="#89d4e8" font-weight="700">Q-TRUST • ODOO 19</text>
-  <text x="74" y="190" font-family="Arial,sans-serif" font-size="48" fill="#fff" font-weight="700">Partner Currency</text>
-  <text x="74" y="250" font-family="Arial,sans-serif" font-size="48" fill="#fff" font-weight="700">Statement</text>
-  <text x="74" y="305" font-family="Arial,sans-serif" font-size="24" fill="#d9edf4">Customer &amp; vendor movements in one selected currency</text>
-  <rect x="74" y="355" width="1052" height="155" rx="18" fill="#fff" opacity=".98"/>
-  <text x="108" y="405" font-family="Arial,sans-serif" font-size="19" fill="#637a8b">OPENING BALANCE</text>
-  <text x="108" y="458" font-family="Arial,sans-serif" font-size="34" fill="#173c57" font-weight="700">12,500.00</text>
-  <text x="390" y="405" font-family="Arial,sans-serif" font-size="19" fill="#637a8b">PERIOD DEBIT</text>
-  <text x="390" y="458" font-family="Arial,sans-serif" font-size="34" fill="#173c57" font-weight="700">8,250.00</text>
-  <text x="660" y="405" font-family="Arial,sans-serif" font-size="19" fill="#637a8b">PERIOD CREDIT</text>
-  <text x="660" y="458" font-family="Arial,sans-serif" font-size="34" fill="#173c57" font-weight="700">3,100.00</text>
-  <text x="930" y="405" font-family="Arial,sans-serif" font-size="19" fill="#637a8b">CLOSING</text>
-  <text x="930" y="458" font-family="Arial,sans-serif" font-size="34" fill="#168566" font-weight="700">17,650.00</text>
-  <text x="74" y="555" font-family="Arial,sans-serif" font-size="20" fill="#c7e5ee">Filters • Multi-company • XLSX export • PDF print</text>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8f6ff"/><stop offset="1" stop-color="#e8f5ff"/></linearGradient><linearGradient id="brand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7b2cbf"/><stop offset="1" stop-color="#4361ee"/></linearGradient></defs>
+<rect width="1200" height="600" rx="26" fill="url(#bg)"/>
+<circle cx="1070" cy="85" r="190" fill="#7b2cbf" opacity=".07"/><circle cx="780" cy="530" r="200" fill="#4361ee" opacity=".06"/>
+<text x="66" y="70" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#6b5876">Q-TRUST  •  ODOO 19</text>
+<text x="66" y="150" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="url(#brand)">Multi-Currency</text>
+<text x="66" y="207" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="#18243a">Partner Statement</text>
+<text x="68" y="255" font-family="Arial,sans-serif" font-size="23" fill="#58677e">Clear customer and vendor balances in your chosen currency</text>
+<g font-family="Arial,sans-serif" font-size="20" fill="#24334b"><text x="70" y="320">✓ Partner statements by currency</text><text x="70" y="360">✓ Detailed debit, credit and balance</text><text x="70" y="400">✓ Multi-company reporting filters</text><text x="70" y="440">✓ PDF and Excel reporting</text></g>
+<rect x="610" y="110" width="525" height="360" rx="24" fill="#fff" stroke="#d5def2" stroke-width="3"/>
+<rect x="610" y="110" width="525" height="58" rx="24" fill="#563d67"/><rect x="610" y="142" width="525" height="26" fill="#563d67"/>
+<text x="638" y="147" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#fff">Partner Statement</text>
+<text x="638" y="204" font-family="Arial,sans-serif" font-size="16" fill="#64748b">PARTNER</text><text x="825" y="204" font-family="Arial,sans-serif" font-size="16" fill="#64748b">CURRENCY</text><text x="988" y="204" font-family="Arial,sans-serif" font-size="16" fill="#64748b">PERIOD</text>
+<rect x="638" y="216" width="168" height="40" rx="8" fill="#f8fafc" stroke="#dbe3ef"/><rect x="825" y="216" width="140" height="40" rx="8" fill="#f8fafc" stroke="#dbe3ef"/><rect x="988" y="216" width="118" height="40" rx="8" fill="#f8fafc" stroke="#dbe3ef"/>
+<text x="652" y="242" font-family="Arial,sans-serif" font-size="17" fill="#24334b">ABC Trading</text><text x="843" y="242" font-family="Arial,sans-serif" font-size="17" fill="#24334b">USD  $</text><text x="1001" y="242" font-family="Arial,sans-serif" font-size="16" fill="#24334b">Jan–Mar</text>
+<rect x="638" y="280" width="468" height="42" rx="8" fill="#eef2ff"/><text x="654" y="307" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#334155">Date</text><text x="755" y="307" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#334155">Reference</text><text x="935" y="307" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#334155">Debit</text><text x="1030" y="307" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#334155">Credit</text>
+<g stroke="#e5eaf2"><path d="M638 347H1106M638 387H1106M638 427H1106"/></g><g font-family="Arial,sans-serif" font-size="16" fill="#334155"><text x="654" y="340">01/01</text><text x="755" y="340">INV/001</text><text x="935" y="340">5,000</text><text x="1030" y="340">—</text><text x="654" y="380">05/01</text><text x="755" y="380">PAY/001</text><text x="935" y="380">—</text><text x="1030" y="380">1,200</text><text x="654" y="420">12/01</text><text x="755" y="420">INV/002</text><text x="935" y="420">2,400</text><text x="1030" y="420">—</text></g>
+<rect x="638" y="438" width="468" height="18" rx="9" fill="url(#brand)" opacity=".85"/>
+<text x="68" y="548" font-family="Arial,sans-serif" font-size="18" fill="#667085">A reporting tool by Q-Trust</text><text x="1135" y="548" text-anchor="end" font-family="Arial,sans-serif" font-size="17" fill="#667085">Accounting • Multi-currency</text>
 </svg>
