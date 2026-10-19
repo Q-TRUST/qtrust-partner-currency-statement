@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_partner_currency_statement" model="ir.actions.report">
+        <field name="name">Foreign Currency Statement</field>
+        <field name="model">qtrust.partner.currency.statement.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">qtrust_partner_currency_statement.statement_report</field>
+        <field name="report_file">qtrust_partner_currency_statement.statement_report</field>
+        <field name="binding_model_id" ref="model_qtrust_partner_currency_statement_wizard"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Statement - %s' % (object.partner_id.name)</field>
+    </record>
+    <template id="statement_report">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page qtrust-currency-statement">
+                    <style>
+                        .qtrust-currency-statement { color: #263445; font-family: Arial, sans-serif; font-size: 10px; }
+                        .qtrust-title { color: #17365d; font-size: 23px; font-weight: 700; margin: 0 0 3px 0; }
+                        .qtrust-subtitle { color: #64748b; font-size: 10px; margin-bottom: 18px; }
+                        .qtrust-meta { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 16px; }
+                        .qtrust-meta td { width: 50%; vertical-align: top; border: 1px solid #dbe3ec; padding: 10px 12px; line-height: 1.8; }
+                        .qtrust-meta td:first-child { background: #f7f9fc; }
+                        .qtrust-label { color: #64748b; font-weight: 600; }
+                        .qtrust-value { color: #1f2937; font-weight: 600; }
+                        .qtrust-table { width: 100%; border-collapse: collapse; font-size: 9px; }
+                        .qtrust-table thead { display: table-header-group; }
+                        .qtrust-table thead th { background: #17365d; color: #fff; border: 1px solid #17365d; padding: 8px 5px; font-weight: 700; }
+                        .qtrust-table tbody td { border: 1px solid #dbe3ec; padding: 6px 5px; vertical-align: top; }
+                        .qtrust-table tbody tr:nth-child(even) { background: #f7f9fc; }
+                        .qtrust-table .opening-row { background: #eaf1f8 !important; font-weight: 700; }
+                        .qtrust-table tfoot th { background: #e1eaf4; border: 1px solid #c7d5e5; padding: 8px 5px; color: #17365d; font-weight: 700; }
+                        .qtrust-number { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+                        .qtrust-date { white-space: nowrap; }
+                        .qtrust-muted { color: #64748b; font-size: 8px; }
+                        .qtrust-note { margin-top: 12px; color: #64748b; font-size: 8px; border-top: 1px solid #dbe3ec; padding-top: 7px; }
+                    </style>
+
+                    <div class="qtrust-title">Partner Statement</div>
+                    <div class="qtrust-subtitle">
+                        Customer and vendor movements
+                        <span> • </span>
+                        Currency: <strong t-esc="currency.name"/>
+                        <t t-if="currency.symbol">(<span t-esc="currency.symbol"/>)</t>
+                    </div>
+
+                    <table class="qtrust-meta">
+                        <tr>
+                            <td>
+                                <span class="qtrust-label">Partner</span><br/>
+                                <span class="qtrust-value" t-esc="partner.display_name"/><br/>
+                                <span class="qtrust-label">Partner type: </span>
+                                <span t-esc="'Customer' if wizard.partner_type == 'customer' else 'Vendor'"/>
+                            </td>
+                            <td>
+                                <span class="qtrust-label">Company / Companies</span><br/>
+                                <span class="qtrust-value">
+                                    <t t-foreach="companies" t-as="co">
+                                        <span t-esc="co.display_name"/><t t-if="not co_last">, </t>
+                                    </t>
+                                </span><br/>
+                                <span class="qtrust-label">Statement period: </span>
+                                <span class="qtrust-value"><span t-esc="date_from"/> — <span t-esc="date_to"/></span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <table class="qtrust-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 11%;">Date</th>
+                                <th style="width: 16%;">Entry</th>
+                                <th style="width: 29%;">Document / Description</th>
+                                <th style="width: 14%; text-align: right;">Debit</th>
+                                <th style="width: 14%; text-align: right;">Credit</th>
+                                <th style="width: 16%; text-align: right;">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="opening-row">
+                                <td class="qtrust-date" t-esc="date_from"/>
+                                <td colspan="2">Opening Balance</td>
+                                <td class="qtrust-number" t-esc="opening_debit_display"/>
+                                <td class="qtrust-number" t-esc="opening_credit_display"/>
+                                <td class="qtrust-number" t-esc="opening_balance_display"/>
+                            </tr>
+                            <t t-foreach="rows" t-as="row">
+                                <tr>
+                                    <td class="qtrust-date" t-esc="row['date']"/>
+                                    <td t-esc="row['entry']"/>
+                                    <td>
+                                        <span t-if="row['document']" t-esc="row['document']"/>
+                                        <span t-if="row['document'] and row['label']"> — </span>
+                                        <span t-esc="row['label']"/>
+                                        <div t-if="row['settlement_note']" class="qtrust-muted" t-esc="row['settlement_note']"/>
+                                    </td>
+                                    <td class="qtrust-number" t-esc="row['debit_display']"/>
+                                    <td class="qtrust-number" t-esc="row['credit_display']"/>
+                                    <td class="qtrust-number" t-esc="row['balance_display']"/>
+                                </tr>
+                            </t>
+                            <tr t-if="not rows">
+                                <td colspan="6" style="text-align: center; padding: 18px; color: #64748b;">No movements found for this period.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3">Period Totals / Closing Balance</th>
+                                <th class="qtrust-number" t-esc="total_debit_display"/>
+                                <th class="qtrust-number" t-esc="total_credit_display"/>
+                                <th class="qtrust-number" t-esc="closing_balance_display"/>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <div class="qtrust-note">
+                        All amounts are shown in <strong t-esc="currency.name"/>.
+                        This statement is generated from posted accounting entries and does not modify standard accounting records.
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="qtrust_partner_currency_statement.PartnerCurrencyStatement">
+        <div class="o_qtrust_currency_statement container-fluid py-3" style="height: 100%; min-height: 0; overflow-y: auto; overflow-x: hidden;">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+                <div><h1 class="mb-1">Foreign Currency Statement</h1><div class="text-muted">Customer and vendor movements in one selected currency</div></div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-secondary" t-on-click="printPdf"><i class="fa fa-file-pdf-o me-1"/> Print PDF</button>
+                    <button class="btn btn-success" t-on-click="exportXlsx" t-att-disabled="!state.hasRun"><i class="fa fa-file-excel-o me-1"/> Export Excel</button>
+                </div>
+            </div>
+            <div class="card mb-3"><div class="card-body py-2">
+                <div class="d-flex flex-nowrap align-items-end gap-2 overflow-visible pb-1">
+                    <div class="flex-shrink-0" style="width: 125px;"><label class="form-label text-nowrap mb-1">Partner Type</label>
+                        <select class="form-select" t-att-value="state.partnerType" t-on-change="onPartnerTypeChange">
+                            <option value="customer">Customer</option><option value="supplier">Vendor</option>
+                        </select>
+                    </div>
+                    <div class="flex-shrink-0 position-relative" style="width: 260px;"><label class="form-label text-nowrap mb-1">Customer / Vendor</label>
+                        <input class="form-control" type="text" placeholder="Select or search customer/vendor..." autocomplete="off"
+                               t-att-value="state.partnerSearch" t-on-input="onPartnerSearch" t-on-focus="onPartnerInputFocus"/>
+                        <div t-if="state.partnerDropdownOpen" class="dropdown-menu show w-100 shadow-sm"
+                             style="max-height: 320px; overflow-y: auto; z-index: 1055;">
+                            <button t-foreach="state.partnerOptions" t-as="partner" t-key="partner.id"
+                                    type="button" class="dropdown-item text-truncate"
+                                    t-on-click="() => this.selectPartner(partner)">
+                                <t t-esc="partner.display_name"/>
+                            </button>
+                            <span t-if="state.partnerLoading" class="dropdown-item-text text-muted small">
+                                Loading customers/vendors...
+                            </span>
+                            <span t-if="!state.partnerLoading and !state.partnerOptions.length" class="dropdown-item-text text-muted small">
+                                No matching customers/vendors found.
+                            </span>
+                            <button t-if="state.partnerHasMore" type="button" class="dropdown-item text-primary border-top mt-1"
+                                    t-on-click="loadMorePartners" t-att-disabled="state.partnerLoading">
+                                <i class="fa fa-search-plus me-1"/> Search More...
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 position-relative" style="width: 220px;"><label class="form-label text-nowrap mb-1">Companies</label>
+                        <button type="button" class="btn btn-outline-secondary w-100 text-start text-truncate" t-on-click="toggleCompanyDropdown"><i class="fa fa-building-o me-1"/><t t-esc="selectedCompanyLabel"/></button>
+                        <div t-if="state.companyDropdownOpen" class="dropdown-menu show p-2 shadow-sm" style="min-width: 260px; max-height: 300px; overflow-y: auto; z-index: 1060;">
+                            <div class="d-flex justify-content-between border-bottom pb-2 mb-2"><strong>Choose active companies</strong><button type="button" class="btn btn-link btn-sm p-0" t-on-click="onSelectAllCompanies">Select all</button></div>
+                            <label t-foreach="state.companies" t-as="company" t-key="company.id" class="dropdown-item d-flex align-items-center gap-2"><input type="checkbox" t-att-checked="state.companyIds.includes(company.id)" t-on-change="(ev) => this.onCompanyToggle(company.id, ev.target.checked)"/><span t-esc="company.name"/></label>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0" style="width: 130px;"><label class="form-label text-nowrap mb-1">Currency</label>
+                        <select class="form-select" t-att-value="state.currencyId" t-on-change="onCurrencyChange">
+                            <option t-foreach="state.currencies" t-as="currency" t-key="currency.id" t-att-value="currency.id"><t t-esc="currency.name"/> — <t t-esc="currency.symbol"/></option>
+                        </select>
+                    </div>
+                    <div class="flex-shrink-0 position-relative" style="width: 170px;">
+                        <label class="form-label text-nowrap mb-1">Date</label>
+                        <button type="button" class="btn btn-outline-secondary w-100" t-on-click="toggleDatePicker">
+                            <i class="fa fa-calendar me-1"/><t t-esc="datePeriodLabel"/>
+                        </button>
+                        <div t-if="state.datePickerOpen" class="dropdown-menu show shadow-sm p-0" style="min-width: 340px; z-index: 1060;">
+                            <div class="d-flex align-items-center justify-content-between px-3 py-2 border-bottom">
+                                <button type="button" class="btn btn-link text-muted p-1" t-on-click="() => this.changeDatePeriod(-1)"><i class="fa fa-chevron-left"/></button>
+                                <strong><t t-esc="datePeriodLabel"/></strong>
+                                <button type="button" class="btn btn-link text-muted p-1" t-on-click="() => this.changeDatePeriod(1)"><i class="fa fa-chevron-right"/></button>
+                            </div>
+                            <button type="button" class="dropdown-item py-2" t-on-click="() => this.selectDatePeriodType('month')">Month</button>
+                            <button type="button" class="dropdown-item py-2" t-on-click="() => this.selectDatePeriodType('quarter')">Quarter</button>
+                            <button type="button" class="dropdown-item py-2" t-on-click="() => this.selectDatePeriodType('year')">Year</button>
+                            <div class="border-top mt-1">
+                                <button type="button" class="dropdown-item py-3" t-on-click="useCustomDates">Custom Dates</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0" style="width: 145px;"><label class="form-label text-nowrap mb-1">From</label>
+                        <input class="form-control" type="date" t-if="state.datePreset === &quot;custom&quot;" t-model="state.dateFrom" t-on-change="onDateRangeManualChange"/>
+                    </div>
+                    <div class="flex-shrink-0" style="width: 145px;"><label class="form-label text-nowrap mb-1">To</label>
+                        <input class="form-control" type="date" t-if="state.datePreset === &quot;custom&quot;" t-model="state.dateTo" t-on-change="onDateRangeManualChange"/>
+                    </div>
+                    <div class="flex-shrink-0" style="width: 150px;">
+                        <button class="btn btn-primary w-100" t-on-click="loadReport" t-att-disabled="state.loading">
+                            <i t-att-class="state.loading ? 'fa fa-spinner fa-spin me-1' : 'fa fa-search me-1'"/> Show Statement
+                        </button>
+                    </div>
+                </div>
+            </div></div>
+            <t t-if="state.hasRun">
+                <div class="row g-3 mb-3">
+                    <div class="col-12 col-md-3"><div class="card h-100"><div class="card-body"><div class="text-muted small">Opening Balance</div><div class="fs-4 fw-bold"><t t-esc="formatMoney(state.openingBalance)"/></div></div></div></div>
+                    <div class="col-12 col-md-3"><div class="card h-100"><div class="card-body"><div class="text-muted small">Total Debit</div><div class="fs-4 fw-bold"><t t-esc="formatMoney(state.totalDebit)"/></div></div></div></div>
+                    <div class="col-12 col-md-3"><div class="card h-100"><div class="card-body"><div class="text-muted small">Total Credit</div><div class="fs-4 fw-bold"><t t-esc="formatMoney(state.totalCredit)"/></div></div></div></div>
+                    <div class="col-12 col-md-3"><div class="card h-100"><div class="card-body"><div class="text-muted small">Closing Balance</div><div class="fs-4 fw-bold text-primary"><t t-esc="formatMoney(state.closingBalance)"/></div></div></div></div>
+                </div>
+                <div class="card">
+                    <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+                        <strong><t t-esc="state.partnerName"/> — <t t-esc="state.currencyName"/></strong>
+                        <input class="form-control" style="max-width: 320px" type="search" placeholder="Filter displayed rows..." t-model="state.searchText"/>
+                    </div>
+                    <div class="table-responsive"><table class="table table-hover table-sm mb-0">
+                        <thead class="table-light"><tr><th>Date</th><th>Entry</th><th>Document</th><th>Description</th><th class="text-end">Debit</th><th class="text-end">Credit</th><th class="text-end">Balance</th></tr></thead>
+                        <tbody>
+                            <tr><td><t t-esc="state.dateFrom"/></td><td colspan="3"><strong>Opening Balance</strong></td>
+                                <td class="text-end"><t t-esc="formatMoney(positiveOpening)"/></td><td class="text-end"><t t-esc="formatMoney(negativeOpening)"/></td><td class="text-end fw-bold"><t t-esc="formatMoney(state.openingBalance)"/></td>
+                            </tr>
+                            <tr t-foreach="filteredRows" t-as="row" t-key="row_index">
+                                <td><t t-esc="row.date"/></td><td><t t-esc="row.entry"/></td><td><t t-esc="row.document"/></td>
+                                <td><t t-esc="row.label"/><div class="small text-muted" t-if="row.settlement_note"><t t-esc="row.settlement_note"/></div></td>
+                                <td class="text-end"><t t-esc="formatMoney(row.debit)"/></td><td class="text-end"><t t-esc="formatMoney(row.credit)"/></td><td class="text-end"><t t-esc="formatMoney(row.balance)"/></td>
+                            </tr>
+                            <tr t-if="!filteredRows.length"><td colspan="7" class="text-center text-muted py-4">No movements match the current filter.</td></tr>
+                        </tbody>
+                        <tfoot class="table-light fw-bold"><tr><td colspan="4">Period Totals</td><td class="text-end"><t t-esc="formatMoney(state.totalDebit)"/></td><td class="text-end"><t t-esc="formatMoney(state.totalCredit)"/></td><td class="text-end"><t t-esc="formatMoney(state.closingBalance)"/></td></tr></tfoot>
+                    </table></div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>
