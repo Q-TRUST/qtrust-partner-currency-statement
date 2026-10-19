@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+<rect width="1200" height="620" rx="24" fill="#f5f3ff"/><rect x="35" y="30" width="1130" height="560" rx="18" fill="#fff" stroke="#ddd6fe" stroke-width="2"/>
+<rect x="35" y="30" width="1130" height="74" rx="18" fill="#4c1d95"/><rect x="35" y="84" width="1130" height="20" fill="#4c1d95"/>
+<text x="70" y="76" font-family="Arial,sans-serif" font-size="28" fill="#fff" font-weight="700">Statement Filters · Illustrative UI</text>
+<text x="70" y="145" font-family="Arial,sans-serif" font-size="18" fill="#6b7280">Choose the criteria before reviewing partner movements.</text>
+<g font-family="Arial,sans-serif" font-size="18" fill="#374151">
+<text x="80" y="208" font-weight="700">Company</text><text x="630" y="208" font-weight="700">Partner</text>
+<text x="80" y="324" font-weight="700">Statement Currency</text><text x="630" y="324" font-weight="700">Date Range</text>
+</g>
+<g fill="#fff" stroke="#c4b5fd" stroke-width="2">
+<rect x="80" y="225" width="470" height="58" rx="9"/><rect x="630" y="225" width="470" height="58" rx="9"/><rect x="80" y="342" width="470" height="58" rx="9"/><rect x="630" y="342" width="220" height="58" rx="9"/><rect x="880" y="342" width="220" height="58" rx="9"/>
+</g>
+<g font-family="Arial,sans-serif" font-size="19" fill="#4b5563"><text x="102" y="261">Your company</text><text x="652" y="261">Customer / Vendor</text><text x="102" y="378">USD / selected currency</text><text x="652" y="378">Start date</text><text x="902" y="378">End date</text></g>
+<rect x="80" y="450" width="200" height="60" rx="10" fill="#6d28d9"/><text x="122" y="488" font-family="Arial,sans-serif" font-size="20" fill="#fff" font-weight="700">View Statement</text>
+<text x="80" y="550" font-family="Arial,sans-serif" font-size="16" fill="#6b7280">Concept illustration only; labels and layout may differ from the installed module.</text></svg>
