@@ -1,5 +1,5 @@
 {
-    "name": "Q-Trust Partner Currency Statement",
+    "name": "Multi-Currency Partner Statement",
     "summary": "Customer and vendor statement in one selected currency",
     "version": "19.0.1.3.13",
     "category": "Accounting/Accounting",
