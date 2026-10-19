@@ -18,5 +18,8 @@
             "qtrust_partner_currency_statement/static/src/xml/partner_currency_statement.xml",
         ],
     },
+    "images": [
+        "static/description/banner.svg",
+    ],
     "application": True,
 }
